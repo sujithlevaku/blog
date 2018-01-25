@@ -12,7 +12,8 @@ gem 'carrierwave', '>= 1.0.0.rc'
 gem  'friendly_id', '~> 5.2'
 gem 'devise'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3',group: :development
+gem 'pg' , group: :production
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
