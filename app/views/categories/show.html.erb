@@ -1,0 +1,35 @@
+<h2><%= @category.name%></h2>
+
+<p> Related Topics - <%= @category.description %></p>
+
+<p><%if @category.articles.empty?%></p>
+<p>NO ARTICLES FOUND</p>
+<%else%>
+<h3> LISTING ARTICLES (<%= @category.articles.length%>)</h3>
+
+<ol>
+		<%@category.articles.each do |article|%>
+		<li>
+			<%= image_tag(article.feature_image_url ,size: "80x80" )%>
+
+			<%= link_to article.title, article_path(article.id)%> 
+			<%= article.body%> <br/>
+
+			<h4> Is Published - <%= article.is_published%> </h4> <br/>
+			<h4> Publish Date : <%= article.publish_date%> </h4> <br/>  
+			<h4><%= article.category.name %></h4>
+		</li>
+		<%end%>
+
+</ol>
+
+
+<%end%>
+
+
+
+
+<%= link_to "Edit", edit_category_path(@category) %> |
+<%= link_to "Destroy",category_path(@category), method: :delete, date:{confirm: "Are you Sure?"}%> |
+<%= link_to "ALL ", categories_path %>
+

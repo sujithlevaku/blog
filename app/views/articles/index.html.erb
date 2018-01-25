@@ -1,0 +1,25 @@
+<p><%if @articles.empty?%></p>
+<p>NO ARTICLES FOUND</p>
+<%else%>
+<h3> LISTING ARTICLES (<%= @articles.length%>)</h3>
+
+<ol>
+		<%@articles.each do |article|%>
+		<li>
+			<%= image_tag(article.feature_image_url ,size: "80x80" )%>
+
+			<%= link_to article.title, article_path(article)
+%> 
+			<%= article.body%> <br/>
+
+			<h4> Is Published - <%= article.is_published%> </h4> <br/>
+			<h4> Publish Date : <%= article.publish_date%> </h4> <br/>  
+			<h4><%= article.category.name %></h4>
+		</li>
+		<%end%>
+
+</ol>
+
+
+<%end%>
+<h2><%= link_to "Add Article" , new_article_path%> </h2>

@@ -1,0 +1,50 @@
+<h2><%= @article.title%></h2>
+
+<%= image_tag @article.feature_image_url %>
+
+<p> body : <%= @article.body%></p>
+<p> published : <%= @article.publish_date%></p>
+ <%= @article.category.name%> <br/>
+
+
+<h2>Listing Reviews (<%=@article.reviews.length%>) </h2>
+<%if @article.reviews.empty?%>
+<p>No reviews found be first one to review </p>
+<%else%>
+<ol>
+ <%@article.reviews.each do |review|%>
+<li>
+  <%= link_to review.body ,review_path(review.id) %> Rating - (<%=review.rating %>) -  <%= link_to "Edit", edit_review_path(review) %>| <%= link_to "Delete", review_path(review), method: :delete, data:{confirm: "This will delete Review"}%><br/>
+</li>
+<%end%><br/>
+</ol>
+<%end%>
+
+
+<%= form_for @review do |f| %>
+
+<%= f.hidden_field :article_id , value: @article.id %><br/>
+
+
+<label for = "review_body"> Write a Review: </label><br/>
+<%= f.text_area :body %><br/>
+<label for ="review_rating"> Rating :</label>
+<%= f.radio_button :rating,1%>1
+<%= f.radio_button :rating,2%>2
+<%= f.radio_button :rating,3%>3
+<%= f.radio_button :rating,4%>4
+<%= f.radio_button :rating,5%>5 <br/>
+<%= f.submit "Add review"%>
+<%end%>
+
+
+
+
+
+
+<%= link_to "Add Review",  new_review_path %> <br/> 
+
+<%= link_to "Edit", edit_article_path(@article) %> |
+<%= link_to "Destroy",article_path(@article), method: :delete, data:{confirm: "Are you Sure?"}%> |
+<%= link_to "ALL ", articles_path %>
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    
+
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <% if user_signed_in? %> 
+      welcome <%= current_user.email %> 
+      <%= link_to "Account Setting", edit_user_registration_path %>  | <%= link_to "Logout", destroy_user_session_path, method: :delete %> | 
+    <% else %>
+      <%= link_to "Register", new_user_registration_path %> | <%= link_to "Login", new_user_session_path %> | 
+    <% end %>
+  <%= link_to "Articles", articles_path%> | <%= link_to "Categories", categories_path%> <br/>
+          <%= notice %></p>
+          <%= alert %></p>
+
+    <%= yield %>
+    
+    <% if user_signed_in? %>
+      <p> You current IP (<%= current_user.current_sign_in_ip %>) </p>
+    <% end %>
+
+  </body>
+</html>
